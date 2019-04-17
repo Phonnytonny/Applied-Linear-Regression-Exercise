@@ -1,0 +1,60 @@
+## 1.1 United Nations
+```{r United nations}
+library(alr4)
+data(UN11)
+names(UN11)
+with(UN11, plot(ppgdp, fertility, main = "fertility versus ppgdp", col = "red"))
+with(UN11, abline(lm(fertility~ppgdp), col = "blue", lty = 2))
+plot(log(UN11$ppgdp),log(UN11$fertility), main = "log(fertility) versus log(ppgdp)", col = "blue")
+with(UN11, abline(lm(log(fertility)~log(ppgdp)), lty = 2, col = "red"))
+```
+
+## 1.2 Smallmouth bass data
+```{r wblake}
+data(wblake)
+summary(wblake)
+dim(wblake)
+## method 1
+mlength <- numeric(8)
+vlength <- numeric(8)
+age <- 1:8
+with(wblake, for (i in 1:8){
+  mlength[i] = mean(Length[Age == i])
+  vlength[i] = sd(Length[Age == i])
+})
+plot(age,mlength)
+plot(age,sdvlength)
+## method 2
+meanLength <- with(wblake, tapply(Length, Age, mean))
+meanLength
+sdlength <- with(wblake, tapply(Length, Age, sd))
+sdlength
+plot(meanLength~age, data = wblake)
+abline(lm(Length ~ Age, data = wblake), lty = 2)
+lines(age, meanLength, lty = 1)
+```
+## 1.3 Mitchell
+```{r mitchell}
+data("Mitchell")
+attach(Mitchell)
+summary(Mitchell)
+plot(Month, Temp)
+detach(Mitchell)
+```
+
+## 1.4 Old Faithful
+```{r oldfaith}
+data("oldfaith")
+attach(oldfaith)
+head(oldfaith)
+plot(Duration, Interval)
+detach(oldfaith)
+```
+
+## 1.5 Water runoff in the Sierras
+```{r water}
+data("water")
+attach(water)
+head(water)
+scatterplotMatrix(~APMAM+APSAB+APSLAKE+OPBPC+OPRC+OPSLAKE+BSAAM)
+```
